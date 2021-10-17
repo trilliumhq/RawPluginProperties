@@ -1,0 +1,184 @@
+##Worlds that collectors will work in
+worlds:
+  - 'world'
+  - 'skyworld'
+
+##Cost of each collector in /collector buy
+collector-cost:
+  drop: 10000 #Drop collectors will cost 10,000
+  crop: 2500 #crop collectors will cost 2,500
+
+##Set whether collectors can be destroyed by explosions or not
+bomb-proof: true #if true, explosions will not affect collectors
+
+##Set whether the collector(if a hopper) should be able to pick up and transfer items
+hopper-transfer: true
+
+##Set the duration between collections. 1200 ticks = 1 minute
+# http://mapmaking.fr/tick/
+# NOTE: Restart required after changing this option
+collection-duration: 1200 #Collectors will pick up items/harvest crops every 1200 ticks
+
+##Auto-Kill Mobs
+#Decide whether you want mob collectors to automatically kill mobs rather than picking up the just mob drops
+#Items will not drop onto the ground, they will directly go into the collector
+auto-kill: false
+#How much time in between automatically killing mobs
+auto-kill-interval: 1100 #Server will auto kill mobs near a drop collector every 1100 ticks
+
+#If this is true, drop collectors will put them mob drops into the collector
+#directly after a mob dies, instead of dropping the items on the ground.
+mob-drop-auto-pickup: false
+
+#############################################
+##Collector item Pricing
+
+#Prices for the Drop Collector seller
+#USE MATERIAL NAMES: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html
+mob-drops:
+  BLAZE_ROD: 1.15
+  STRING: 0.45
+  SPIDER_EYE: 3.25
+  GUNPOWDER: 1.1
+  ROTTEN_FLESH: 0.4
+  PRISMARINE_SHARD: 0.65
+  PRISMARINE_CRYSTALS: 30.0
+  ENDER_PEARL: 0.6
+  GHAST_TEAR: 20.0
+  MAGMA_CREAM: 0.6
+  PHANTOM_MEMBRANE: 5.0
+  ARROW: 0.05
+  BONE: 0.04
+  SHULKER_SHELL: 5.0
+  SLIME_BALL: 1.2
+  GLASS_BOTTLE: 0.45
+  GLOWSTONE_DUST: 0.50
+  STICK: 0.3
+  SUGAR: 0.4
+  COAL: 0.5
+  REDSTONE: 1.1
+  GOLD_NUGGET: 0.22
+  GOLD_INGOT: 2.0
+
+#Prices for the Crop Collector seller
+#USE MATERIAL NAMES: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html
+crop-pricing:
+  WHEAT: 1.0 #each wheat will be sold for 1 currency
+  WHEAT_SEEDS: 0.2
+  COCOA_BEANS: 0.5
+  POTATO: 1.75
+  BEETROOT: 1.65
+  BEETROOT_SEEDS: 0.3
+  SWEET_BERRIES: 1.5
+  CARROT: 1.75
+  NETHER_WART: 2.0
+  POISONOUS_POTATO: 1.75
+  CACTUS: 1.0
+  SUGARCANE: 1.0
+#############################################
+
+############################################
+##Collector Upgrades
+
+##Capacity Upgrades (The max storage of a collector before it sells)
+#You can add as many capacity levels as you want, just make sure it increases by one each level
+#Also, don't forget to set a price for each capacity
+storage-upgrades:
+  1:
+    items: 1000
+    price: 0.0 #this price doesn't matter, they start off at this level
+  2:
+    items: 2500
+    price: 10000.0
+  3:
+    items: 10000 #level 3 can hold a max of 10000 items
+    price: 500000.0 #this upgrade costs 500,000.0
+  4:
+    items: 20000
+    price: 1000000.0
+
+##There are three fortune levels, you can set the price for each one
+##Note: You start off at fortune level zero
+fortune-prices:
+  1: 10000.0 #Upgrade from zero to one costs 10,000
+  2: 100000.0
+  3: 2000000.0
+
+############################################
+
+############################################
+##Hologram Configuration
+hologram:
+  enabled: true
+  drop: '&#e057ff&lDrop Collector'
+  crop: '&#fafa34&lCrop Collector'
+
+###########################################
+##Menu Title Configuration
+Menu Titles:
+  Buy Menu: 'Purchase Collector'
+  Confirm-Buy Menu:
+    drop: 'Buy Drop Collector?'
+    crop: 'Buy Crop Collector?'
+  Collector Menu:
+    drop: 'Mob Drop Collector'
+    crop: 'Crop Collector'
+  Collector-Storage Menu:
+    drop: 'Collected Mob Drops'
+    crop: 'Collected Crop Produce'
+  Collector-Upgrade Menu: 'Collector Upgrade Options'
+############################################
+
+###########################################
+##Collector Item Configuration
+Names:
+  drop: '&dMob Collector'
+  crop: '&eCrop Collector'
+
+#Use these material names: https://hub.spigotmc.org/javadocs/spigot/org/bukkit/Material.html
+#Ensure that you choose a placeable block
+Materials:
+  drop: 'HOPPER'
+  crop: 'HOPPER'
+############################################
+
+###########################################
+##Message Configuration - Edit messages sent to the player
+Messages:
+  no-permission: '&4You don"t have permission to run this command.'
+  got-collector:
+    drop: '&aDrop Collector obtained.'
+    crop: '&aCrop Collector obtained.'
+  given-collector:
+    drop: '&aYou have been given a Drop Collector.'
+    crop: '&aYou have been given a Crop Collector.'
+  reloaded: '&aThe config.yml has been reloaded.'
+  upgrade-complete:
+    storage: '&eCollector Storage Capacity has been upgraded.'
+    fortune: '&eCollector Fortune Level has been upgraded.'
+  max-storage: '&7Your collector is at max storage capacity.'
+  max-fortune: '&7Your collector is at max fortune.'
+  cant-afford-upgrade: '&4You cannot afford this upgrade.'
+  first-page: '&7You are on the first page.'
+  last-page: '&7You are on the last page.'
+#############################################
+
+############################################
+##Command Configuration - Edit All Commands
+Commands:
+  Buy:
+    name: 'buy'
+    description: 'Buy a chunk collector'
+    syntax: '/collector buy'
+  Give:
+    name: 'give'
+    description: 'Give yourself or another player a chunk collector'
+    syntax: '/collector give <type> [player]'
+  Help:
+    name: 'help'
+    description: 'See commands and info'
+    syntax: '/collector help'
+  Reload:
+    name: 'reload'
+    description: 'Reload the configuration file'
+    syntax: '/collector reload'
