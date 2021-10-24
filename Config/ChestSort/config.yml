@@ -14,14 +14,11 @@
 #######    Commands     #######
 ###############################
 
-# /sort (or /chestsort)   Shows the player settings GUI
+# /sort (or /chestsort)   Toggle automatic sorting for containers (chests, barrels, enderchests, llamas, etc.)
 # /sort on                Enable automatic sorting for containers
 # /sort off               Disable automatic sorting for containers
 # /sort hotkeys           Open a GUI to change the sorting hotkeys
 # /sort help              Display help about the /sort (or /chestsort) command
-# /sort reload            Reloads the config file
-# /sort resetplayersettings   Resets every player's sorting settings. You should consider
-#                             running this after changing the default hotkey settings.
 
 # /isort (or /invsort)    Sort the player's inventory
 # /isort hotbar           Sort the player's hotbar
@@ -157,11 +154,11 @@ allow-sorting-hotkeys: true
 #
 sorting-hotkeys:
   # Use middle click (mousewheel) on ANY inventory slot as hotkey. Permission: chestsort.hotkey.middleclick
-  middle-click: true 
+  middle-click: true
   # Use shift + left-click on any EMPTY inventory slot as hotkey. Permission: chestsort.hotkey.shiftclick
   shift-click: true
   # Use double left-click on any EMPTY inventory slot as hotkey. Permission: chestsort.hotkey.doubleclick
-  double-click: true 
+  double-click: true
   # Use shift + right-click on any EMPTY inventory slot as hotkey. Permission: chestsort.hotkey.shiftrightclick
   shift-right-click: true
 
@@ -201,7 +198,7 @@ additional-hotkeys:
 
 # Checks for updates (asynchronously).
 # When enabled, a message is printed in the console if a new
-# version has been found, and OPs will be notified when they join the server 
+# version has been found, and OPs will be notified when they join the server
 # When set to true, check for updates on startup and every X hours (see "check-interval" below)
 # When set to on-startup, only check on server startup
 # When set to false, don't check for updates
@@ -313,15 +310,18 @@ hook-generic: true
 # it if it's the only possibility.
 prevent-sorting-null-inventories: false
 
-##### Protection Plugins #####
-# ChestSort checks whether a player is allowed to interact with a block
-# before attempting to sort a container when using the "outside"/"left-click-block"
-# hotkey. This can result in messages from WorldGuard, CoreProtect, etc. being
-# send to the player. To avoid this, set the following setting to true.
-# This can however lead to some warnings from other plugins that do not
-# properly check a Players' class before casting it to "CraftPlayer".
-# Although this should NOT cause ANY problems, it's disabled by default.
-mute-protection-plugins: false
+##### Important: Getting errors from other plugins? #####
+# Some plugins (especially anti cheat plugins) do some dirty stuff
+# when they are checking certain events, which results in errors
+# coming from those plugins.
+# If this happens to you, set this option to "false".
+# (Technical background: ChestSort uses a "fake player" class to
+# check if players have permissions to build/break/interact at
+# certain locations without those players getting denial messages
+# from protection plugins. Unfortunately, some plugins decide it's
+# a good idea to blindly cast a Player object to a CraftPlayer object
+# without checking if the Player object is an instanceof CraftPlayer)
+use-advanced-protection-plugin-detection: true
 
 ##########################
 ##### Sorting Method #####
@@ -700,27 +700,6 @@ message-gui-left-click-outside: "Left-Click from outside"
 #message-gui-right-click: "&7Vaciar Cofre (Doble Pulsación / Botón Derecho)"
 #message-gui-left-click-outside: "&7Botón Izquierdo en el exterior."
 
-##### Swedish
-#message-when-using-chest: "&7Tips: Skriv &6/chestsort&7 för att starta automatisk kist sortering."
-#message-when-using-chest2: "&7Tips: Skriv &6/chestsort&7 för att stänga av automatisk kist sortering."
-#message-sorting-disabled: "&7Automatisk kist sortering har &cstängts av&7."
-#message-sorting-enabled: "&7Automatisk kist sortering har &astartatsd&7."
-#message-inv-sorting-disabled: "&7Automatisk inventarium sortering har &cstängts avd&7."
-#message-inv-sorting-enabled: "&7Automatisk inventarium sortering har &astartats&7."
-#message-player-inventory-sorted: "&7Ditt inventarium har blivit sorterad."
-#message-error-players-only: "&cFel: Detta kommando kan endast användas av spelare."
-#message-error-invalid-options: "&cFel: Okänt alternativ %s. Giltiga alternativ är %s."
-#message-container-sorted: "&aBehållare sorterad!"
-#message-gui-enabled: "&aStartats"
-#message-gui-disabled: "&cStängts av"
-#message-gui-middle-click: "Mitten-Klick"
-#message-gui-shift-click: "Shift + Klick"
-#message-gui-double-click: "Dubbel-Klick"
-#message-gui-shift-right-click: "Shift + Höger-Klick"
-#message-gui-left-click: "Fyll Kistan (Vänster-Klick/Dubbel-Vänster-Klick)"
-#message-gui-right-click: "Töm Kistan (höger-Klick/Dubbel-Höger-Klick)"
-#message-gui-left-click-outside: "Vänster-Klick från utsidan"
-
 ##### Turkish
 #message-when-using-chest: "&7İpucu: &6/chestsort&7 yazarak otomatik sandık düzenlemesini aktif edebilirsiniz"
 #message-when-using-chest2: "&7İpucu: &6/chestsort&7 yazarak otomatik sandık düzenlemesini deaktif edebilirsiniz."
@@ -781,5 +760,5 @@ debug2: false
 log: false
 
 # Do not change the following lines!
-config-version: ${config.version}
-plugin-version: ${project.version}
+config-version: 202110011410
+plugin-version: 11.5.6
